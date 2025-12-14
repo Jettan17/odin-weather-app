@@ -1,1 +1,1 @@
-Webpack Template Repository for TOP, modifications to be made as new packages are used.
+The Odin Project Weather App, will be mainly practicing API calls and the dynamic import() function.
