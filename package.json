@@ -1,0 +1,31 @@
+{
+  "name": "odin-webpack-template",
+  "version": "1.0.0",
+  "description": "Webpack Template Repository for TOP, modifications to be made as new packages are used.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx webpack --config webpack.prod.js",
+    "dev": "npx webpack serve --config webpack.dev.js",
+    "deploy": "npm run build && git add dist -f && git commit -m \"Deployment commit\" && git subtree push --prefix dist origin gh-pages"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jettan17/odin-webpack-template.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jettan17/odin-webpack-template/issues"
+  },
+  "homepage": "https://github.com/Jettan17/odin-webpack-template#readme",
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "html-loader": "^5.1.0",
+    "html-webpack-plugin": "^5.6.5",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.103.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
+  }
+}
