@@ -19,16 +19,13 @@ function processWeatherData(jsonData) {
         description: jsonData.description,
         currentConditions: {
             conditions: jsonData.currentConditions.conditions,
-            datetime: new Date().toISOString().slice(0, 10), //currentDay in YYYY MM DD format
             feelslike: jsonData.currentConditions.feelslike,
             humidity: jsonData.currentConditions.humidity,
             icon: jsonData.currentConditions.icon,
             temp: jsonData.currentConditions.temp
         },
-        dayConditions: [...jsonData.days.map(day => ({
-            conditions: day.conditions,
+        dayConditions: [...jsonData.days.slice(0, 7).map(day => ({
             datetime: day.datetime,
-            feelslike: day.feelslike,
             humidity: day.humidity,
             icon: day.icon,
             temp: day.temp
