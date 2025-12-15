@@ -19,7 +19,7 @@ function processWeatherData(jsonData) {
         description: jsonData.description,
         currentConditions: {
             conditions: jsonData.currentConditions.conditions,
-            datetime: new Date().toISOString().slice(0, 10),
+            datetime: new Date().toISOString().slice(0, 10), //currentDay in YYYY MM DD format
             feelslike: jsonData.currentConditions.feelslike,
             humidity: jsonData.currentConditions.humidity,
             icon: jsonData.currentConditions.icon,
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const formData = new FormData(form);
 
-        const dataObject = Object.fromEntries(formData.entries());
+        const dataObject = Object.fromEntries(formData.entries()); //converts to object
 
         console.log(dataObject["location-input"]);
         const weatherData = getWeatherData(dataObject["location-input"]);
