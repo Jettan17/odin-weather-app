@@ -36,6 +36,7 @@ function processWeatherData(jsonData) {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+    //Handle form input
     const form = document.getElementById("location-form");
 
     form.addEventListener("submit", (e) => {
@@ -48,5 +49,55 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(dataObject["location-input"]);
         const weatherData = getWeatherData(dataObject["location-input"]);
         console.log(weatherData);
+
+        //Load weatherData into display
+        //change textContent and stuff
+
+        const locationInfoDisplay = document.getElementById("location-info-display");
+        locationInfoDisplay.style.display = "block";
     });
+
+    //Generate week display
+    const weekDisplay = document.getElementById("week-display");
+    for (let i = 0; i < 7; i++) {
+        const dayContainer = document.createElement("div");
+        dayContainer.classList.add("day-container");
+
+        const dayName = document.createElement("p");
+        dayName.classList.add("day-name");
+        const dayList = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+        dayName.textContent = dayList[i];
+        dayContainer.appendChild(dayName);
+
+        const weatherIcon = document.createElement("img");
+        weatherIcon.src = "";
+        weatherIcon.alt = "weather icon";
+        dayContainer.appendChild(weatherIcon);
+        
+        const temperatureIcon = document.createElement("img");
+        temperatureIcon.src = "";
+        temperatureIcon.alt = "temperature";
+        dayContainer.appendChild(temperatureIcon);
+
+        const tempValue = document.createElement("p");
+        tempValue.classList.add("temp");
+        tempValue.textContent = "";
+        dayContainer.appendChild(tempValue);
+
+        const humidityIcon = document.createElement("img");
+        humidityIcon.src = "";
+        humidityIcon.alt = "humidity";
+        dayContainer.appendChild(humidityIcon);
+
+        const humidityValue = document.createElement("p");
+        humidityValue.classList.add("humidity");
+        humidityValue.textContent = "";
+        dayContainer.appendChild(humidityValue);
+
+        weekDisplay.appendChild(dayContainer);
+    };
+
+    //Hide location info display intially
+    const locationInfoDisplay = document.getElementById("location-info-display");
+    locationInfoDisplay.style.display = "none";
 });
