@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //Handle form input
     const form = document.getElementById("location-form");
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         const formData = new FormData(form);
@@ -47,11 +47,51 @@ document.addEventListener("DOMContentLoaded", () => {
         const dataObject = Object.fromEntries(formData.entries()); //converts to object
 
         console.log(dataObject["location-input"]);
-        const weatherData = getWeatherData(dataObject["location-input"]);
+        const weatherData = await getWeatherData(dataObject["location-input"]);
         console.log(weatherData);
 
         //Load weatherData into display
-        //change textContent and stuff
+        const locationName = document.getElementById("location-name");
+        locationName.textContent = weatherData.address;
+
+        const locationDescription = document.getElementById("location-description");
+        locationDescription.textContent = weatherData.description;
+
+        // const weatherIconNames = { //update with actual filenames
+        //     "Partially cloudy": "cloud",
+        //     "Sunny": "sun"
+        // };
+
+        // const currentIcon = document.querySelector("#current-day-display .weather-icon");
+        // currentIcon.src = `./${weatherIconNames[`${weatherData.currentConditions.icon}`]}`;
+        
+        for (const [key, value] of Object.entries(weatherData.currentConditions)) {
+            if (key === "icon") {
+                continue;
+            }
+            const currentAttribute = document.querySelector(`#current-day-display .${key}`);
+            currentAttribute.textContent = value;
+        }
+
+        const dayList = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        let counter = 0;
+        for (const dayContainer of document.getElementById("week-display").children) {
+            const dayData = weatherData.dayConditions[counter];
+
+            const dayName = dayContainer.querySelector(".day-name");
+            dayName.textContent = dayList[(new Date(dayData.datetime)).getDay()];
+
+            // const weatherIcon = dayContainer.querySelector(".weather-icon");
+            // weatherIcon.src = `./${weatherIconNames[`${dayData.icon}`]}`;
+
+            const tempVal = dayContainer.querySelector(".temp");
+            tempVal.textContent = dayData.temp;
+
+            const humidityVal = dayContainer.querySelector(".humidity");
+            humidityVal.textContent = dayData.humidity;
+
+            counter++;
+        }
 
         const locationInfoDisplay = document.getElementById("location-info-display");
         locationInfoDisplay.style.display = "block";
@@ -65,11 +105,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const dayName = document.createElement("p");
         dayName.classList.add("day-name");
-        const dayList = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+        const dayList = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
         dayName.textContent = dayList[i];
         dayContainer.appendChild(dayName);
 
         const weatherIcon = document.createElement("img");
+        weatherIcon.classList.add("weather-icon");
         weatherIcon.src = "";
         weatherIcon.alt = "weather icon";
         dayContainer.appendChild(weatherIcon);
