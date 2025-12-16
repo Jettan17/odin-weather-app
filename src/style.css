@@ -14,3 +14,7 @@
     --success: oklch(0.7 0.05 160);
     --info: oklch(0.7 0.05 260);
 }
+
+img {
+    max-height: 50px;
+}

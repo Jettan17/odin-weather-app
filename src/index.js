@@ -1,4 +1,56 @@
 import "./style.css";
+import tempIcon from "./assets/temp.svg";
+import humidityIcon from "./assets/humidity.svg";
+
+// Import all weather icons
+import clearDay from "./assets/weather-icons/clear-day.svg";
+import clearNight from "./assets/weather-icons/clear-night.svg";
+import cloudy from "./assets/weather-icons/cloudy.svg";
+import fog from "./assets/weather-icons/fog.svg";
+import hail from "./assets/weather-icons/hail.svg";
+import partlyCloudyDay from "./assets/weather-icons/partly-cloudy-day.svg";
+import partlyCloudyNight from "./assets/weather-icons/partly-cloudy-night.svg";
+import rainSnowShowersDay from "./assets/weather-icons/rain-snow-showers-day.svg";
+import rainSnowShowersNight from "./assets/weather-icons/rain-snow-showers-night.svg";
+import rainSnow from "./assets/weather-icons/rain-snow.svg";
+import rain from "./assets/weather-icons/rain.svg";
+import showersDay from "./assets/weather-icons/showers-day.svg";
+import showersNight from "./assets/weather-icons/showers-night.svg";
+import sleet from "./assets/weather-icons/sleet.svg";
+import snowShowersDay from "./assets/weather-icons/snow-showers-day.svg";
+import snowShowersNight from "./assets/weather-icons/snow-showers-night.svg";
+import snow from "./assets/weather-icons/snow.svg";
+import thunderRain from "./assets/weather-icons/thunder-rain.svg";
+import thunderShowersDay from "./assets/weather-icons/thunder-showers-day.svg";
+import thunderShowersNight from "./assets/weather-icons/thunder-showers-night.svg";
+import thunder from "./assets/weather-icons/thunder.svg";
+import wind from "./assets/weather-icons/wind.svg";
+
+// Map icon names to imported paths
+const iconMap = {
+    "clear-day": clearDay,
+    "clear-night": clearNight,
+    cloudy,
+    fog,
+    hail,
+    "partly-cloudy-day": partlyCloudyDay,
+    "partly-cloudy-night": partlyCloudyNight,
+    "rain-snow-showers-day": rainSnowShowersDay,
+    "rain-snow-showers-night": rainSnowShowersNight,
+    "rain-snow": rainSnow,
+    rain,
+    "showers-day": showersDay,
+    "showers-night": showersNight,
+    sleet,
+    "snow-showers-day": snowShowersDay,
+    "snow-showers-night": snowShowersNight,
+    snow,
+    "thunder-rain": thunderRain,
+    "thunder-showers-day": thunderShowersDay,
+    "thunder-showers-night": thunderShowersNight,
+    thunder,
+    wind
+};
 
 async function getWeatherData(location) {
     const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=Q9VPWA64VU6LM9FM36Y3ZAXJW&contentType=json`);
@@ -57,13 +109,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const locationDescription = document.getElementById("location-description");
         locationDescription.textContent = weatherData.description;
 
-        // const weatherIconNames = { //update with actual filenames
-        //     "Partially cloudy": "cloud",
-        //     "Sunny": "sun"
-        // };
-
-        // const currentIcon = document.querySelector("#current-day-display .weather-icon");
-        // currentIcon.src = `./${weatherIconNames[`${weatherData.currentConditions.icon}`]}`;
+        const currentIcon = document.querySelector("#current-day-display .weather-icon");
+        currentIcon.src = iconMap[weatherData.currentConditions.icon];
         
         for (const [key, value] of Object.entries(weatherData.currentConditions)) {
             if (key === "icon") {
@@ -81,8 +128,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const dayName = dayContainer.querySelector(".day-name");
             dayName.textContent = dayList[(new Date(dayData.datetime)).getDay()];
 
-            // const weatherIcon = dayContainer.querySelector(".weather-icon");
-            // weatherIcon.src = `./${weatherIconNames[`${dayData.icon}`]}`;
+            const weatherIcon = dayContainer.querySelector(".weather-icon");
+            weatherIcon.src = iconMap[dayData.icon];
 
             const tempVal = dayContainer.querySelector(".temp");
             tempVal.textContent = dayData.temp;
@@ -116,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
         dayContainer.appendChild(weatherIcon);
         
         const temperatureIcon = document.createElement("img");
-        temperatureIcon.src = "";
+        temperatureIcon.src = tempIcon;
         temperatureIcon.alt = "temperature";
         dayContainer.appendChild(temperatureIcon);
 
@@ -125,10 +172,10 @@ document.addEventListener("DOMContentLoaded", () => {
         tempValue.textContent = "";
         dayContainer.appendChild(tempValue);
 
-        const humidityIcon = document.createElement("img");
-        humidityIcon.src = "";
-        humidityIcon.alt = "humidity";
-        dayContainer.appendChild(humidityIcon);
+        const humidityImg = document.createElement("img");
+        humidityImg.src = humidityIcon;
+        humidityImg.alt = "humidity";
+        dayContainer.appendChild(humidityImg);
 
         const humidityValue = document.createElement("p");
         humidityValue.classList.add("humidity");
