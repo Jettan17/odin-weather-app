@@ -9,21 +9,78 @@
     --border-muted: oklch(0.3 0.05 264);
     --primary: oklch(0.76 0.1 264);
     --secondary: oklch(0.76 0.1 84);
-    --danger: oklch(0.7 0.05 30);
-    --warning: oklch(0.7 0.05 100);
-    --success: oklch(0.7 0.05 160);
-    --info: oklch(0.7 0.05 260);
+    --danger: oklch(0.7 0.075 30);
+    --warning: oklch(0.7 0.075 100);
+    --success: oklch(0.7 0.075 160);
+    --info: oklch(0.7 0.075 260);
 }
 
 body {
     margin: 0px;
     padding: 20px;
-    font-size: 2.2ch;
+    font-size: 2.1ch;
     font-family: "DM Sans", system-ui;
+    color: var(--text);
+    background-color: var(--bg-dark);
 }
 
 input, button {
     font-family: "DM Sans", system-ui;
+}
+
+#location-form {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+#location-form label {
+    color: var(--text);
+}
+
+#validation-label {
+    color: var(--danger);
+    font-size: 0.9em;
+    margin: 0;
+}
+
+button {
+    background-color: var(--primary);
+    color: var(--bg-dark);
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+input {
+    background-color: var(--bg);
+    color: var(--text);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 15px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+img[alt="thermometer"], img[alt="humidity"] {
+    filter: brightness(0) saturate(100%) invert(95%) sepia(99%) saturate(5981%) hue-rotate(178deg) brightness(107%) contrast(104%);
 }
 
 #current-day-display img {
@@ -31,7 +88,23 @@ input, button {
 }
 
 h1 {
-    margin: 2px 5px;
+    margin: 0 0 10px 0;
+    color: var(--primary);
+    font-size: 2.2em;
+}
+
+h2 {
+    color: var(--text);
+    margin: 0 0 15px 0;
+}
+
+p {
+    margin: 5px 0;
+    color: var(--text-muted);
+}
+
+form {
+    margin: 0px;
 }
 
 #week-display img {
@@ -42,22 +115,39 @@ h1 {
     display: flex;
     justify-content: center;
     margin: 20px;
+    gap: 10px;
 }
 
 #current-day-display {
     flex: 0.7;
+    background-color: var(--bg);
+    border: 2px solid var(--border-muted);
+    border-radius: 12px;
 
     justify-items: center;
     align-items: center;
     text-align: center;
     padding: 20px;
+    margin: 0px;
 
     display: grid;
-    grid-template: 1fr 2fr 0.5fr 0.5fr / 1fr 0.5fr 0.5fr 1fr;
+    grid-template: 0.5fr 1fr 2fr 0.5fr 0.3fr / 1fr 0.5fr 0.5fr 1fr;
+}
+
+#location-name {
+    grid-column: span 2;
+}
+
+#location-description {
+    grid-column: span 2;
+    margin: 30px;
 }
 
 #current-day-display h2 {
     grid-column: span 4;
+    color: var(--primary);
+    padding: 30px 70px;
+    font-size: 2em;
 }
 
 #current-day-display img[alt="thermometer"] {
@@ -66,18 +156,43 @@ h1 {
 
 #current-day-display .conditions {
     grid-row: span 2;
+    color: var(--text);
 }
 
 #week-display {
     flex: 0.3;
-
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 50px;
+    gap: 12px;
+    margin-top: 0;
 }
 
 .day-container {
+    background-color: var(--bg);
+    border: 1px solid var(--border-muted);
+    border-radius: 8px;
+    padding: 12px 20px;
     display: grid;
-    grid-template: 1fr / 50px 70px repeat(4, 50px);
+    grid-template: 1fr / minmax(50px, 1fr) minmax(50px, 1fr) 50px 50px 50px 50px;
+    gap: 10px;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.day-container:hover {
+    background-color: var(--bg-light);
+    border-color: var(--border);
+    transform: translateX(4px);
+}
+
+.day-name {
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0;
+}
+
+.temp, .humidity, .feelslike {
+    margin: 0;
+    color: var(--text);
+    font-weight: 500;
 }
