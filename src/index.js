@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         const temperatureIcon = document.createElement("img");
         temperatureIcon.src = tempIcon;
-        temperatureIcon.alt = "temperature";
+        temperatureIcon.alt = "thermometer";
         dayContainer.appendChild(temperatureIcon);
 
         const tempValue = document.createElement("p");
