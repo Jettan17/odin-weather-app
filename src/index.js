@@ -102,6 +102,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const weatherData = await getWeatherData(dataObject["location-input"]);
         console.log(weatherData);
 
+        const validationLabel = document.getElementById("validation-label");
+
+        if (weatherData === null) {
+            validationLabel.style.visibility = "visible";
+            return;
+        } else {
+            validationLabel.style.visibility = "hidden";
+        }
+
         //Load weatherData into display
         const locationName = document.getElementById("location-name");
         locationName.textContent = weatherData.address;
@@ -141,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const locationInfoDisplay = document.getElementById("location-info-display");
-        locationInfoDisplay.style.display = "block";
+        locationInfoDisplay.style.visibility = "visible";
     });
 
     //Generate week display
@@ -187,5 +196,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //Hide location info display intially
     const locationInfoDisplay = document.getElementById("location-info-display");
-    locationInfoDisplay.style.display = "none";
+    locationInfoDisplay.style.visibility = "hidden";
+
+    //Hide validation label
+    const validationLabel = document.getElementById("validation-label");
+    validationLabel.style.visibility = "hidden";
 });
