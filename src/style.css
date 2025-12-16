@@ -15,6 +15,65 @@
     --info: oklch(0.7 0.05 260);
 }
 
-img {
+body {
+    margin: 0px;
+    padding: 20px;
+    font-size: 2.2ch;
+    font-family: "DM Sans", system-ui;
+}
+
+#current-day-display img {
+    max-height: 70px;
+}
+
+h1 {
+    margin: 0px;
+}
+
+#week-display img {
     max-height: 50px;
+}
+
+#location-imagery-display {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+#current-day-display {
+    flex: 0.7;
+
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+
+    display: grid;
+    grid-template: 1fr 2fr 0.5fr 0.5fr / 1fr 0.5fr 0.5fr 1fr;
+}
+
+#current-day-display h2 {
+    grid-column: span 4;
+}
+
+#current-day-display img[alt="thermometer"] {
+    grid-column: span 2;
+}
+
+#current-day-display .conditions {
+    grid-row: span 2;
+}
+
+#week-display {
+    flex: 0.3;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 50px;
+}
+
+.day-container {
+    display: grid;
+    grid-template: 1fr / 50px 70px repeat(4, 50px);
 }
